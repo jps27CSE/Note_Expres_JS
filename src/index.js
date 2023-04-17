@@ -1,21 +1,23 @@
 const express = require("express");
 const app = express();
-const quotes = require("./quotes.json");
+const userRouter = require("./routes/userRoutes");
+const noteRouter = require("./routes/noteRoutes");
+const mongoose = require("mongoose");
 
 app.get("/", (req, res) => {
   res.send("hello jack ");
 });
 
-app.get("/quotes", (req, res) => {
-  res.status(200).json(quotes);
-});
+app.use("/user", userRouter);
+app.use("/note", noteRouter);
 
-app.get("/random", (req, res) => {
-  const index = Math.floor(Math.random() * quotes.length);
-  const quote = quotes[index];
-  res.json(quote);
-});
-
-app.listen(5000, () => {
-  console.log("Server is running on port 5000");
-});
+mongoose
+  .connect(
+    "mongodb+srv://jackpritomsoren:admin123@cluster0.lsbetjy.mongodb.net/?retryWrites=true&w=majority"
+  )
+  .then(() => {
+    app.listen(5000, () => {
+      console.log("Server is running on port 5000");
+    });
+  })
+  .catch((err) => console.log(err));
