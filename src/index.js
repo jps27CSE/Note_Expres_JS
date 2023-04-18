@@ -4,6 +4,8 @@ const userRouter = require("./routes/userRoutes");
 const noteRouter = require("./routes/noteRoutes");
 const mongoose = require("mongoose");
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("hello jack ");
 });
