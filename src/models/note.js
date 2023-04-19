@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const noteSchema = mongoose.Schema(
   {
     title: {
-      type: string,
+      type: String,
       required: true,
     },
     description: {
-      type: string,
+      type: String,
       required: true,
     },
     userId: {
